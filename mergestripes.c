@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
-#include <sys/uio.h>
 
 int main(int argc, char **argv)
 {
