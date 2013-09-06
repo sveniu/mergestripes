@@ -1,0 +1,22 @@
+mergestripes - a simple stripe merger
+
+Open N input files, read stripes of size S from each input file in
+order, and sequentially write each stripe to the output file.
+
+Usage: ./mergestripes [-s stripe_size] outfile infile infile [infile...]
+
+Default stripe size is 512 bytes.
+
+Prompted by a manual RAID recovery, I needed a simple tool to merge
+together stripes of a RAID-0 array after having imaged the harddrives
+to a larger disk.
+
+The RAID was a LaCie 4big Quadra, which oddly uses a 512-byte stripe
+size and no meta data (at least in the beginning of the disks; there
+seems to be some data at the very end of each disk). The lack of
+metadata actually made the recovery fairly simple.
+
+Performance is absolutely excellent (hundreds of MB/sec) due to the
+behind-the-scenes buffering done by fread/fwrite. This makes it
+unnecessary to read/write larger blocks while doing small-stripe
+merging in memory.
